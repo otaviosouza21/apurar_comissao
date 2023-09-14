@@ -1,0 +1,95 @@
+.resultado{
+    margin-top: 20px;
+    color: white;
+    text-align: start;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    
+   
+}
+
+.valorTotal{
+   display: flex ;
+    border-radius: 10px;
+    font-size: 1.2rem;
+    margin-bottom: 10px;
+
+}
+
+.valorTotal span{
+    display: flex;
+    align-items: center;
+    color: green;
+    font-weight: bold;
+    margin-left: 10px;
+
+}
+
+.vendedora{
+    font-size: 1.2rem;
+   
+}
+
+.vendedora span{
+    color:green
+
+}
+
+.tabelas{
+    margin-top: 10px;
+    display: flex;
+    justify-content: space-around;
+    width: 100%;
+    gap: 10px;
+    height: 400px;
+  
+}
+
+
+.tabelas h2{
+ color: green;
+    font-size: 1.8rem;
+}
+
+.tabelaExclusivo,.tabelaComum{
+    text-align: center;
+    background-color: rgba(0, 0, 0, 0.658);
+    flex:1;
+    border-radius: 10px;
+    padding: 20px;
+}
+
+.atualizadas{
+    display: flex;
+    justify-content: center;
+    gap: 20px;
+    align-items: center;
+    
+}
+
+.porcentagem{
+    overflow-y: scroll;
+    max-height: 300px;
+    padding: 10px;
+}
+
+.head{
+    display: flex;
+    align-items: center;
+    gap: 20px;
+    background-color:rgba(0, 0, 0, 0.658);
+    padding: 10px 20px;
+    border-radius: 10px;
+}
+
+@media (max-width:970px) {
+    .resultado{
+        gap: 60px;
+    }
+
+    .tabelas{
+        flex-direction: column;
+
+    }
+}

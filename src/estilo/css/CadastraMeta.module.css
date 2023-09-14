@@ -1,0 +1,19 @@
+.form {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 5px;
+}
+
+.title {
+  color: rgb(58, 93, 134) !important;
+  grid-column: 1/3 !important;
+}
+
+.button{
+    grid-column: 1/3;
+}
+.voltar{
+    text-decoration: underline;
+    grid-column: 1/3;
+    cursor: pointer;
+}

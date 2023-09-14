@@ -1,0 +1,19 @@
+.container{
+margin-top: 20px;
+}
+
+.container label{
+    color: rgb(121, 121, 121);
+    display: block;
+}
+
+.container input{
+    background-color: rgba(0, 0, 0, 0.658);
+    color: white;
+    font-size: .9rem;
+    border-radius: 5px;
+    cursor: pointer;
+   max-width: 100%;
+   padding: 10px;
+}
+

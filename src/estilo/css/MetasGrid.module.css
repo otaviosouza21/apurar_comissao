@@ -1,0 +1,18 @@
+
+
+.grid th{
+    color: black;
+    font-weight: bold;
+}
+
+
+.grid td{
+   color: black;
+   border-bottom: solid 1px rgb(117, 116, 116);
+}
+
+
+.tbody td img{
+width: 22px;
+cursor: pointer;
+}
