@@ -2,22 +2,21 @@ import React from "react";
 import SubirArquivo from "./SubirArquivo";
 import { GlobalContext, GlobalStorage } from "../Helps/GlobalContext";
 import Apuracao from "./Apuracao";
-import style from '../estilo/css/Home.module.css';
+import style from "../estilo/css/Home.module.css";
 
+const Home = () => {
+  const { data } = React.useContext(GlobalContext);
 
+//renderiza o componente de Subir arquivo e o resultado da apuração
 
-const Home = () =>{
-const {data} = React.useContext(GlobalContext)
-
-
-    return(
+  return (
     <main className={style.main}>
-        <h1>Apuração de Comissões</h1>
-    
-        <SubirArquivo />
-         {data && <Apuracao />} 
-    </main>
-    )
-}
+      <h1>Apuração de Comissões</h1>
 
-export default Home
+      <SubirArquivo /> 
+      {data && <Apuracao />}
+    </main>
+  );
+};
+
+export default Home;

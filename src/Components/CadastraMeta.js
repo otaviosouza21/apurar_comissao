@@ -7,10 +7,30 @@ const CadastraMeta = ({ setCadastroMeta }) => {
   const { form, setForm, atualizaMeta, formAtualizado, setFormAtualizado } =
     React.useContext(GlobalContext);
 
-  function handleUpdate(e) {
+  async function handleUpdate(e) {
     e.preventDefault();
+
+    try {
+      const response = await fetch(`/api/atualizar/${atualizaMeta}`, {
+        method: "PUT",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify(form),
+      });
+
+      if (response.ok) {
+        console.log("Item atualizado com sucesso");
+      } else {
+        console.log("Erro ao atualizar o item");
+      }
+    } catch (error) {
+      console.error(error);
+      console.log("Erro ao conectar ao servidor");
+    }
   }
 
+  // busca a api INSERT e realiza uma inclusão no banco
   function handleSubmit(e) {
     e.preventDefault();
 
@@ -19,13 +39,13 @@ const CadastraMeta = ({ setCadastroMeta }) => {
       headers: {
         "Content-Type": "application/json",
       },
-      body: JSON.stringify(form),
+      body: JSON.stringify(form), // coloca o objeto form no body e converte em stringFy
     })
       .then((response) => {
         return response.json();
       })
       .then((result) => {
-        setForm({ codigo: "", descricao: "", meta_valor: "", meta_quant: "" });
+        setForm({ codigo: "", descricao: "", meta_valor: "", meta_quant: "",valor_unitario: "" }); // apaga os campos do form
         return console.log(result.message);
       })
       .catch((error) => {
@@ -33,6 +53,7 @@ const CadastraMeta = ({ setCadastroMeta }) => {
       });
   }
 
+  //VV Renderiza o formulario de cadastro VV//
   return (
     <form className={style.form}>
       <a onClick={() => setCadastroMeta(false)} className={style.voltar}>
@@ -43,6 +64,7 @@ const CadastraMeta = ({ setCadastroMeta }) => {
         {atualizaMeta ? "Atualizar Meta" : "Cadastrar nova Meta"}
       </h4>
       <Input label="codigo" type="number" text="Codigo" />
+      <Input label="valor_unitario" type="number" text="Valor Unitario" />
       <Input label="descricao" type="text" text="Descrição" />
       <Input label="meta_valor" type="number" text="Meta em R$" />
       <Input label="meta_quant" type="number" text="Meta em Quantidade" />
@@ -50,14 +72,14 @@ const CadastraMeta = ({ setCadastroMeta }) => {
       {atualizaMeta ? (
         <button
           onClick={handleUpdate}
-          className={`btn btn-primary ${style.button}`}
+          className={`btn btn-primary ${style.button}`} // botao para função de UPDATE
         >
           Atualizar
         </button>
       ) : (
         <button
           onClick={handleSubmit}
-          className={`btn btn-primary ${style.button}`}
+          className={`btn btn-primary ${style.button}`} // btn para função de CADASTRAR
         >
           Gravar
         </button>

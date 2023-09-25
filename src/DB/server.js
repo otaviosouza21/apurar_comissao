@@ -14,12 +14,12 @@ connect(); // Chamada para estabelecer a conexão ao iniciar o aplicativo
 app.use(bodyParser.json());
 
 app.post("/api/insert", async (req, res) => {
-  const { codigo, descricao, meta_valor, meta_quant } = req.body;
+  const { codigo, descricao, meta_valor, meta_quant,valor_unitario } = req.body;
 
   try {
     await client.query(
-      "INSERT INTO meta (codigo,descricao,meta_valor,meta_quant) VALUES ($1,$2,$3,$4)",
-      [codigo, descricao, meta_valor, meta_quant]
+      "INSERT INTO meta (codigo,descricao,meta_valor,meta_quant,valor_unitario) VALUES ($1,$2,$3,$4,$5)",
+      [codigo, descricao, meta_valor, meta_quant,valor_unitario]
     );
     res.json({ message: "Dados inseridos com sucesso" });
   } catch (error) {

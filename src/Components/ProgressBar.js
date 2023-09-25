@@ -2,12 +2,8 @@ import React from "react";
 import style from "../estilo/css/ProgressBar.module.css";
 
 
-
-
-
 const ProgressBar = ({ porcentagem, item }) => {
-
-const quantidadeVendida = ((porcentagem/100)*item.quantMeta)
+  const quantidadeVendida = (porcentagem / 100) * item.meta_quant;
 
 
 
@@ -16,18 +12,16 @@ const quantidadeVendida = ((porcentagem/100)*item.quantMeta)
       return "red";
     } else if (porcentagem > 50) {
       return "yellow";
-    } else if (porcentagem >= 100){
-      return 'green'
+    } else if (porcentagem >= 100) {
+      return "green";
     }
   }
 
   return (
     <section className={style.container}>
       <p className={style.descricao}>
-        {item.produto} - {item.descricao} -{" "}
-        <span style={{ color: bateuMeta(porcentagem)}}>
-          {porcentagem}%
-        </span>
+        {item.codigo} - {item.descricao} -{" "}
+        <span style={{ color: bateuMeta(porcentagem) }}>{porcentagem}%</span>
       </p>
       <div
         className={`progress ${style.bar}`}
@@ -40,9 +34,12 @@ const quantidadeVendida = ((porcentagem/100)*item.quantMeta)
         <div
           className="progress-bar"
           style={{
-            width: porcentagem ? porcentagem.replace(",", ".") + "%" : null, 
+            width: porcentagem ? porcentagem.replace(",", ".") + "%" : 0,
           }}
-        > {Math.ceil(quantidadeVendida)} / {item.quantMeta} pçs </div>
+        >
+          {" "}
+          {Math.ceil(quantidadeVendida)} / {item.meta_quant} pçs{" "}
+        </div>
       </div>
     </section>
   );

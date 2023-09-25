@@ -15,7 +15,7 @@
    background-color: rgba(235, 235, 235, 0.856);
    display: flex;
    flex: 1;
-   max-width: 600px;
+   max-width: 1000px;
    padding: 20px;
    display: flex;
    flex-direction: column;

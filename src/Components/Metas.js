@@ -16,9 +16,9 @@ const Metas = ({ metas, modal, setModal }) => {
   }
 
   function handleCadastroMetas() {
-    setCadastroMeta(true);
-    setAtualizaMeta(false)
-    setForm({ codigo: "", descricao: "", meta_valor: "", meta_quant: "" })
+    setCadastroMeta(true); //Exibe a tela de cadastro de meta
+    setAtualizaMeta(false) // desabilita a tela de atualizar meta 
+    setForm({ codigo: "", descricao: "", meta_valor: "", meta_quant: "" }) // apaga os dados do formulario
   }
 
   const columnDefs = [
@@ -27,6 +27,7 @@ const Metas = ({ metas, modal, setModal }) => {
     { headerName: "Valor Meta", field: "valor meta" },
   ];
 
+  // Renderiza a tela de exbição das metas atuais
   return (
     <div ref={ref} onClick={handleClick} className={style.metas}>
       <div className={`${style.container} left`}>

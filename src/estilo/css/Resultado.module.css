@@ -1,95 +1,124 @@
-.resultado{
-    margin-top: 20px;
-    color: white;
-    text-align: start;
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    
-   
+.resultado {
+  margin-top: 20px;
+  color: white;
+  text-align: start;
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 20px;
 }
 
-.valorTotal{
-   display: flex ;
-    border-radius: 10px;
-    font-size: 1.2rem;
-    margin-bottom: 10px;
-
+.head {
+  display: flex;
+  align-items: center;
+  gap: 20px;
+  background-color: rgba(0, 0, 0, 0.658);
+  padding: 10px 20px;
+  border-radius: 10px;
+  box-shadow: 0px 0px 15px 5px rgba(0, 0, 0, 0.253);
+  border: solid 2px rgb(37, 37, 37);
+  display: flex;
+  justify-content: center;
+}
+.valorTotal {
+  display: flex;
+  border-radius: 10px;
+  font-size: 1.2rem;
+  margin-bottom: 10px;
+  gap: 20px;
+  justify-content: center;
 }
 
-.valorTotal span{
-    display: flex;
-    align-items: center;
-    color: green;
-    font-weight: bold;
-    margin-left: 10px;
-
+.valorTotal div{
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  padding: 5px;
 }
 
-.vendedora{
-    font-size: 1.2rem;
-   
+.valorTotal div:last-child{
+  border-left: solid 1px rgb(37, 37, 37); 
 }
 
-.vendedora span{
-    color:green
-
+.valorTotal span {
+  display: flex;
+  align-items: center;
+  color: green;
+  font-weight: bold;
+  margin-left: 10px;
 }
 
-.tabelas{
-    margin-top: 10px;
-    display: flex;
-    justify-content: space-around;
-    width: 100%;
-    gap: 10px;
-    height: 400px;
+.vendedora {
+  font-size: 1.2rem;
+}
+
+.vendedora span {
+  color: green;
+}
+
+.tabelas {
+  margin-top: 10px;
+  display: flex;
+  justify-content: space-around;
+  width: 100%;
+  gap: 10px;
+  border-radius: 50px;
+}
+
+.tabelaContainer {
+  text-align: center;
+  background-color: rgba(0, 0, 0, 0.658);
+  flex: 1;
+  border-radius: 10px;
+  box-shadow: 0px 0px 15px 5px rgba(0, 0, 0, 0.253);
+  border: solid 2px rgb(37, 37, 37);
+}
+
+.tabelaContainer h1 {
+  font-size: 1.6rem;
+}
+
+.atualizadas {
+  display: flex;
+  justify-content: space-around;
+  gap: 20px;
+  align-items: center;
+  background: rgb(22, 22, 22);
+  font-size: 1rem
+}
+
+.apuracao {
+  display: flex;
+  flex-direction: column;
+  padding: 10px;
   
 }
 
-
-.tabelas h2{
- color: green;
-    font-size: 1.8rem;
+.apuracao h4{
+    font-size: 1rem;
 }
 
-.tabelaExclusivo,.tabelaComum{
-    text-align: center;
-    background-color: rgba(0, 0, 0, 0.658);
-    flex:1;
-    border-radius: 10px;
-    padding: 20px;
+.apuracao p{
+    color: rgb(0, 94, 0);
+    font-weight: bold;
+    font-size: 1.3rem;
 }
 
-.atualizadas{
-    display: flex;
-    justify-content: center;
-    gap: 20px;
-    align-items: center;
-    
+
+
+
+.porcentagem {
+  overflow-y: scroll;
+  max-height: 300px;
+  padding: 20px;
 }
 
-.porcentagem{
-    overflow-y: scroll;
-    max-height: 300px;
-    padding: 10px;
-}
+@media (max-width: 970px) {
+  .resultado {
+    gap: 60px;
+  }
 
-.head{
-    display: flex;
-    align-items: center;
-    gap: 20px;
-    background-color:rgba(0, 0, 0, 0.658);
-    padding: 10px 20px;
-    border-radius: 10px;
-}
-
-@media (max-width:970px) {
-    .resultado{
-        gap: 60px;
-    }
-
-    .tabelas{
-        flex-direction: column;
-
-    }
+  .tabelas {
+    flex-direction: column;
+  }
 }

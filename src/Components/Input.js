@@ -6,9 +6,6 @@ import { GlobalContext } from "../Helps/GlobalContext"
 const Input =({label,type,text})=>{
 
   const {form,setForm} = React.useContext(GlobalContext)
-  
-
- 
 
    function handleChange(e){
    setForm({...form,[label]: e.target.value})
@@ -16,7 +13,7 @@ const Input =({label,type,text})=>{
 
 
     function grid(label){
-        if(label === "codigo" || label === "descricao"){
+        if(label === "descricao"){
             return true
         }
     }
