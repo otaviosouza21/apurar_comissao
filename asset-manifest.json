@@ -1,16 +1,16 @@
 {
   "files": {
-    "main.css": "/apurar_comissao/static/css/main.bf3f2e67.css",
-    "main.js": "/apurar_comissao/static/js/main.b7157ac6.js",
+    "main.css": "/apurar_comissao/static/css/main.f3423584.css",
+    "main.js": "/apurar_comissao/static/js/main.66f2ddbe.js",
     "static/media/edit.svg": "/apurar_comissao/static/media/edit.3ea4cf483224d228ffe4b284f7c30807.svg",
     "static/media/trash.svg": "/apurar_comissao/static/media/trash.6bd08d78953018d52713606e36af9699.svg",
     "index.html": "/apurar_comissao/index.html",
     "static/media/close-circle-svgrepo-com.svg": "/apurar_comissao/static/media/close-circle-svgrepo-com.04c71fceae5d95df107ef7f26563a597.svg",
-    "main.bf3f2e67.css.map": "/apurar_comissao/static/css/main.bf3f2e67.css.map",
-    "main.b7157ac6.js.map": "/apurar_comissao/static/js/main.b7157ac6.js.map"
+    "main.f3423584.css.map": "/apurar_comissao/static/css/main.f3423584.css.map",
+    "main.66f2ddbe.js.map": "/apurar_comissao/static/js/main.66f2ddbe.js.map"
   },
   "entrypoints": [
-    "static/css/main.bf3f2e67.css",
-    "static/js/main.b7157ac6.js"
+    "static/css/main.f3423584.css",
+    "static/js/main.66f2ddbe.js"
   ]
 }
