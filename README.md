@@ -3,7 +3,7 @@
 ```plaintext
 Este é o README da aplicação de apuração de comissões, uma ferramenta poderosa que permite a leitura e apuração de valores de comissões a partir de um arquivo Excel contendo relatórios de vendas. Além disso, a aplicação possui a funcionalidade de separar e analisar um campo específico quando um vendedor realiza vendas especiais em uma tabela exclusiva, que contém itens de uma promoção especial. A aplicação também permite o acompanhamento da quantidade vendida de cada item da promoção exclusiva para avaliar se o vendedor atingiu ou não a meta estabelecida.
 
-A aplicação foi desenvolvida com o objetivo de facilitar o processo de apuração de comissões para vendedores e fornecer uma análise mais detalhada das vendas que se enquadram em promoções especiais. Ela é especialmente útil para empresas que dependem de cálculos precisos de comissões para incentivar e remunerar sua equipe de vendas, bem como para monitorar o desempenho em relação às metas de vendas de itens em promoção.
+A aplicação foi desenvolvida com o objetivo de facilitar o processo de apuração de comissões para vendedores e fornecer uma análise mais detalhada das vendas que se enquadram em promoções especiais. Ela é especialmente útil para empresas que dependem de cálculos precisos de comissões para incentivar e remunerar sua eqipe de vendas, bem como para monitorar o desempenho em relação às metas de vendas de itens em promoção.
 
 1. Leitura de Arquivos Excel
    - A aplicação é capaz de ler arquivos Excel contendo relatórios de vendas. Isso permite que os dados sejam importados com facilidade, economizando tempo e minimizando erros de entrada manual.
