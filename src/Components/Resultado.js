@@ -3,6 +3,9 @@ import style from "../estilo/css/Resultado.module.css";
 import Metas from "./Metas";
 import ProgressBar from "./ProgressBar";
 import { GlobalContext } from "../Helps/GlobalContext";
+import Alerta from "./Alerta";
+import Resumo from "./Resumo";
+import Sintetico from "./Sintetico";
 
 const Resultado = ({
   vendedora,
@@ -13,9 +16,10 @@ const Resultado = ({
   porcVendido,
   valVendidoExclusivo,
   valVendidoComum,
+  pedidosSinteticos
 }) => {
-  const [modal, setModal] = React.useState(false);
-  const { atuaisMetas } = React.useContext(GlobalContext);
+  const [modal, setModal] = React.useState("");
+  const { atuaisMetas, setAlerta, alerta } = React.useContext(GlobalContext);
 
   function converteParaReal(numero) {
     return numero.toLocaleString("pt-BR", {
@@ -24,18 +28,19 @@ const Resultado = ({
     });
   }
 
-  function handleCLick() {
-    setModal(true);
+  function handleCLick(modal) {
+    setModal(modal);
   }
 
   return (
     <section className={style.resultado}>
+     { modal == "sintetico" && <Sintetico setModal={setModal} pedidosSinteticos={pedidosSinteticos} />}
       <div className={style.head}>
         <h3 className={style.vendedora}>
-          Vendedora <span>{vendedora}</span>{" "}
+          Vendedor(a) <span>{vendedora}</span>{" "}
         </h3>
       </div>
-      <div className={style.head}>
+      <div className={style.head} onClick={()=>{handleCLick("sintetico")}}>
         <p className={style.valorTotal}>
           <div>
             Valor total já Vendido{" "}
@@ -73,26 +78,28 @@ const Resultado = ({
             <h4>Total Comissão</h4>
             <p>{converteParaReal(valorExclusivo)}</p>
           </div>
-          <button onClick={handleCLick} className="btn btn-secondary btn-sm">
+          <button onClick={()=>{handleCLick("metas")}} className="btn btn-secondary btn-sm">
             Metas Atualizadas
           </button>
         </div>
 
         <div className={style.porcentagem}>
-          {atuaisMetas.map((item, index) => {
-            return (
-              <div key={index}>
-                <ProgressBar
-                  key={item.codigo}
-                  item={item}
-                  porcentagem={porcVendido["porc_" + item.codigo]}
-                />
-              </div>
-            );
-          })}
+          {atuaisMetas
+            ? atuaisMetas.map((item, index) => {
+                return (
+                  <div key={index}>
+                    <ProgressBar
+                      key={item.codigo}
+                      item={item}
+                      porcentagem={porcVendido["porc_" + item.codigo]}
+                    />
+                  </div>
+                );
+              })
+            : alerta && <Alerta setAlerta={setAlerta} alerta={alerta} />}
         </div>
 
-        {modal && (
+        {modal == "metas" && (
           <Metas
             metas={atuaisMetas}
             valVendido={valVendido}

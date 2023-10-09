@@ -40,6 +40,7 @@ fetchData()
   });
 
   const [atualizaMeta, setAtualizaMeta] = React.useState(null);
+  const [alerta, setAlerta] = React.useState(true);
 
   return (
     <GlobalContext.Provider
@@ -54,6 +55,8 @@ fetchData()
         setFormAtualizado,
         atuaisMetas,
         setAtuaisMetas,
+        alerta,
+        setAlerta
       }}
     >
       {children}

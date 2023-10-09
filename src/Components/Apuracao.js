@@ -3,10 +3,8 @@ import { GlobalContext, GlobalStorage } from "../Helps/GlobalContext";
 import style from "../estilo/css/Apuracao.module.css";
 import Resultado from "./Resultado";
 
-
-
 const Apuracao = () => {
-  const { data,atuaisMetas } = React.useContext(GlobalContext);
+  const { data, atuaisMetas } = React.useContext(GlobalContext);
 
   const vendedora = data[0]["Apelido"];
 
@@ -24,8 +22,7 @@ const Apuracao = () => {
   const valorVendidoEX = tabela_exclusiva.reduce((a, b) => {
     return a + b["Valor Bruto Comissão"];
   }, 0);
- const valVendidoExclusivo = valorVendidoEX
-
+  const valVendidoExclusivo = valorVendidoEX;
 
   //filtra comissoes comuns
   const tabela_comum = data
@@ -42,12 +39,10 @@ const Apuracao = () => {
   const valorVendidoCom = tabela_comum.reduce((a, b) => {
     return a + b["Valor Bruto Comissão"];
   }, 0);
- const valVendidoComum = valorVendidoCom
-
-
+  const valVendidoComum = valorVendidoCom;
 
   //calcula comissao total
-  const comissao_total = (comissao_comum + comissao_exclusiva);
+  const comissao_total = comissao_comum + comissao_exclusiva;
 
   //Metas de Vendas//
 
@@ -79,8 +74,6 @@ const Apuracao = () => {
       .reduce((a, b) => a + b["Valor Bruto Comissão"], 0),
   };
 
-
-
   //porcentagem vendida por produto
   const porcentagemVendida = {
     porc_3530: 0,
@@ -95,11 +88,47 @@ const Apuracao = () => {
 
   // calcula as porcentagens que já foram vendidas e coloca no objeto
   // porcentagemVendida
-  atuaisMetas.forEach((item) => {
-    porcentagemVendida["porc_" + item.codigo] = (
-      (valorVendidoProduto["prod_" + item.codigo] / item.meta_valor) *
-      100
-    ).toFixed(2);
+  atuaisMetas &&
+    atuaisMetas.forEach((item) => {
+      porcentagemVendida["porc_" + item.codigo] = (
+        (valorVendidoProduto["prod_" + item.codigo] / item.meta_valor) *
+        100
+      ).toFixed(2);
+    });
+
+  //APURAÇÃO DE PEDIDOS SINTETICOS
+
+  const sinteticos = {};
+
+  for (const obj of data) {
+    const pedido = obj["Pedido"];
+
+    if (!sinteticos[pedido]) {
+      sinteticos[pedido] = [];
+    }
+
+    sinteticos[pedido].push(obj);
+  }
+
+  const pedidosSinteticos = [];
+
+  for (const obj in sinteticos) {
+    pedidosSinteticos[obj] = {
+      pedido: sinteticos[obj][0]["Pedido"],
+      vendedor: sinteticos[obj][0]["Apelido"],
+      total: sinteticos[obj].reduce((a, b) => {
+        return a + b["Valor Bruto Comissão"];
+      }, 0),
+      cliente: sinteticos[obj][0]["Cliente"],
+      apuracao: sinteticos[obj][0]["Data Apuração"],
+      comissao: sinteticos[obj].reduce((a, b) => {
+        return a + b["Valor da Comissão"];
+      }, 0),
+    };
+  }
+
+  const filtroPedidosSinteticos = pedidosSinteticos.filter((filt) => {
+    return filt !== undefined;
   });
 
   return (
@@ -114,6 +143,7 @@ const Apuracao = () => {
         valVendido={valorVendidoProduto}
         valVendidoExclusivo={valVendidoExclusivo}
         valVendidoComum={valVendidoComum}
+        pedidosSinteticos={filtroPedidosSinteticos}
       />
     </section>
   );

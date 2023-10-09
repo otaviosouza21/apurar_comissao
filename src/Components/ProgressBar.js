@@ -1,11 +1,8 @@
 import React from "react";
 import style from "../estilo/css/ProgressBar.module.css";
 
-
 const ProgressBar = ({ porcentagem, item }) => {
   const quantidadeVendida = (porcentagem / 100) * item.meta_quant;
-
-
 
   function bateuMeta(porcentagem) {
     if (porcentagem < 50) {

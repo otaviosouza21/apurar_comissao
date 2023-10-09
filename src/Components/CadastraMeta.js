@@ -45,7 +45,13 @@ const CadastraMeta = ({ setCadastroMeta }) => {
         return response.json();
       })
       .then((result) => {
-        setForm({ codigo: "", descricao: "", meta_valor: "", meta_quant: "",valor_unitario: "" }); // apaga os campos do form
+        setForm({
+          codigo: "",
+          descricao: "",
+          meta_valor: "",
+          meta_quant: "",
+          valor_unitario: "",
+        }); // apaga os campos do form
         return console.log(result.message);
       })
       .catch((error) => {

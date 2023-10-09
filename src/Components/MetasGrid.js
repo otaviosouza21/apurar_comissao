@@ -6,17 +6,21 @@ import { GlobalContext } from "../Helps/GlobalContext";
 import CadastraMeta from "./CadastraMeta";
 
 const MetasGrid = ({ cadastroMeta, setCadastroMeta }) => {
-  const { form, setForm, setAtualizaMeta, atuaisMetas, setAtuaisMetas,fetchData } =
-    React.useContext(GlobalContext);
+  const {
+    form,
+    setForm,
+    setAtualizaMeta,
+    atuaisMetas,
+    setAtuaisMetas,
+    fetchData,
+  } = React.useContext(GlobalContext);
 
-
-    function converteParaReal(numero) {
-      return numero.toLocaleString("pt-BR", {
-        style: "currency",
-        currency: "BRL",
-      });
-    }
-  
+  function converteParaReal(numero) {
+    return numero.toLocaleString("pt-BR", {
+      style: "currency",
+      currency: "BRL",
+    });
+  }
 
   async function handleDelete(id) {
     try {
@@ -36,10 +40,16 @@ const MetasGrid = ({ cadastroMeta, setCadastroMeta }) => {
     }
   }
 
-  function handleUpdate(codigo, descricao, meta_valor, meta_quant, valor_unitario) {
+  function handleUpdate(
+    codigo,
+    descricao,
+    meta_valor,
+    meta_quant,
+    valor_unitario
+  ) {
     setCadastroMeta(true);
     setAtualizaMeta(codigo);
-    setForm({ codigo, descricao, meta_valor, meta_quant,valor_unitario });
+    setForm({ codigo, descricao, meta_valor, meta_quant, valor_unitario });
   }
 
   return (

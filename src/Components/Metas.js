@@ -7,7 +7,7 @@ import { GlobalContext } from "../Helps/GlobalContext";
 
 const Metas = ({ metas, modal, setModal }) => {
   const [cadastroMeta, setCadastroMeta] = React.useState(false);
-  const {setAtualizaMeta,setForm} = React.useContext(GlobalContext)
+  const { setAtualizaMeta, setForm } = React.useContext(GlobalContext);
 
   const ref = React.useRef();
 
@@ -17,8 +17,8 @@ const Metas = ({ metas, modal, setModal }) => {
 
   function handleCadastroMetas() {
     setCadastroMeta(true); //Exibe a tela de cadastro de meta
-    setAtualizaMeta(false) // desabilita a tela de atualizar meta 
-    setForm({ codigo: "", descricao: "", meta_valor: "", meta_quant: "" }) // apaga os dados do formulario
+    setAtualizaMeta(false); // desabilita a tela de atualizar meta
+    setForm({ codigo: "", descricao: "", meta_valor: "", meta_quant: "" }); // apaga os dados do formulario
   }
 
   const columnDefs = [
@@ -41,7 +41,13 @@ const Metas = ({ metas, modal, setModal }) => {
             + Nova Meta
           </button>
         ) : null}
-        {cadastroMeta !== true ? <MetasGrid metas={metas} cadastroMeta={cadastroMeta} setCadastroMeta={setCadastroMeta} /> : null}
+        {cadastroMeta !== true ? (
+          <MetasGrid
+            metas={metas}
+            cadastroMeta={cadastroMeta}
+            setCadastroMeta={setCadastroMeta}
+          />
+        ) : null}
         {cadastroMeta && <CadastraMeta setCadastroMeta={setCadastroMeta} />}
       </div>
     </div>

@@ -19,6 +19,15 @@
   display: flex;
   justify-content: center;
 }
+
+.head:hover {
+  cursor: pointer;
+  background-color: black;
+}
+
+.head:active {
+  transform: scale(1.01);
+}
 .valorTotal {
   display: flex;
   border-radius: 10px;
@@ -28,7 +37,7 @@
   justify-content: center;
 }
 
-.valorTotal div{
+.valorTotal div {
   display: flex;
   flex-direction: column;
   justify-content: center;
@@ -36,8 +45,8 @@
   padding: 5px;
 }
 
-.valorTotal div:last-child{
-  border-left: solid 1px rgb(37, 37, 37); 
+.valorTotal div:last-child {
+  border-left: solid 1px rgb(37, 37, 37);
 }
 
 .valorTotal span {
@@ -84,28 +93,24 @@
   gap: 20px;
   align-items: center;
   background: rgb(22, 22, 22);
-  font-size: 1rem
+  font-size: 1rem;
 }
 
 .apuracao {
   display: flex;
   flex-direction: column;
   padding: 10px;
-  
 }
 
-.apuracao h4{
-    font-size: 1rem;
+.apuracao h4 {
+  font-size: 1rem;
 }
 
-.apuracao p{
-    color: rgb(0, 94, 0);
-    font-weight: bold;
-    font-size: 1.3rem;
+.apuracao p {
+  color: rgb(0, 94, 0);
+  font-weight: bold;
+  font-size: 1.3rem;
 }
-
-
-
 
 .porcentagem {
   overflow-y: scroll;
