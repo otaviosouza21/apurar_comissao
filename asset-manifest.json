@@ -1,16 +1,14 @@
 {
   "files": {
-    "main.css": "/apurar_comissao/static/css/main.55985ebc.css",
-    "main.js": "/apurar_comissao/static/js/main.fdff3ee9.js",
-    "static/media/edit.svg": "/apurar_comissao/static/media/edit.3ea4cf483224d228ffe4b284f7c30807.svg",
-    "static/media/trash.svg": "/apurar_comissao/static/media/trash.6bd08d78953018d52713606e36af9699.svg",
+    "main.css": "/apurar_comissao/static/css/main.3cec6b59.css",
+    "main.js": "/apurar_comissao/static/js/main.0ec0f761.js",
     "index.html": "/apurar_comissao/index.html",
-    "static/media/close-circle-svgrepo-com.svg": "/apurar_comissao/static/media/close-circle-svgrepo-com.04c71fceae5d95df107ef7f26563a597.svg",
-    "main.55985ebc.css.map": "/apurar_comissao/static/css/main.55985ebc.css.map",
-    "main.fdff3ee9.js.map": "/apurar_comissao/static/js/main.fdff3ee9.js.map"
+    "static/media/close-circle-svgrepo-com.svg": "/apurar_comissao/static/media/close-circle-svgrepo-com.1c16dc7c6b2349273472600860ffb517.svg",
+    "main.3cec6b59.css.map": "/apurar_comissao/static/css/main.3cec6b59.css.map",
+    "main.0ec0f761.js.map": "/apurar_comissao/static/js/main.0ec0f761.js.map"
   },
   "entrypoints": [
-    "static/css/main.55985ebc.css",
-    "static/js/main.fdff3ee9.js"
+    "static/css/main.3cec6b59.css",
+    "static/js/main.0ec0f761.js"
   ]
 }
