@@ -1,19 +1,33 @@
 .container{
 margin-top: 20px;
+
 }
 
 .container label{
-    color: rgb(121, 121, 121);
+    color: var(--bs-emphasis-color);
     display: block;
+    cursor: pointer;
 }
 
 .container input{
-    background-color: rgba(0, 0, 0, 0.658);
+    background-color: var(--bs-primary);
     color: white;
     font-size: .9rem;
-    border-radius: 5px;
     cursor: pointer;
    max-width: 100%;
-   padding: 10px;
 }
 
+@media (max-width:600px) {
+    .container{
+        display: flex;
+        flex-direction: column;
+    }
+
+    .container label{
+        width: 100%;
+    }
+    
+    .form-control{
+       display: none;
+    }
+}

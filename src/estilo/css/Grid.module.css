@@ -1,0 +1,53 @@
+
+.grid{
+    flex: 2;
+    border: solid 2px var(--bs-primary);
+}
+
+.grid th {
+  color: black;
+  font-weight: bold;
+}
+
+.grid td {
+  color: black;
+  border-bottom: solid 1px rgb(117, 116, 116);
+}
+
+.tbody td img {
+  width: 22px;
+  cursor: pointer;
+}
+
+.containerTable {
+  overflow-y: scroll;
+  border: solid 2px var(--bs-primary);
+  border-radius:  0px 0px 5px 5px;
+}
+
+::-webkit-scrollbar {
+  width: 8px; /* Largura da barra de rolagem */
+}
+
+::-webkit-scrollbar-thumb {
+  background-color: var(--bs-primary); /* Cor de fundo do polegar */
+  border-radius: 5px; /* Cantos arredondados do polegar */
+}
+
+.legenda {
+  display: flex;
+  justify-content: space-around;
+ margin-bottom: 20px;
+}
+
+
+
+.legenda span:nth-child(3){
+  color: black;
+}
+
+
+.total{
+    background-color: black;
+    color: white !important;
+}

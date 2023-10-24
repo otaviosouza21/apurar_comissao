@@ -1,15 +1,16 @@
 import React from "react";
-import style from "../estilo/css/Metas.module.css";
-import grid from "../estilo/css/MetasGrid.module.css";
+import style from "../estilo/css/Sintetico.module.css";
+import grid from "../estilo/css/Grid.module.css";
 import close from "../estilo/img/close-circle-svgrepo-com.svg";
-import RowComponent from "./RowComponent";
-
-function converteParaReal(numero) {
-  return numero.toLocaleString("pt-BR", {
-    style: "currency",
-    currency: "BRL",
-  });
-}
+import {
+  DataGrid,
+  GridToolbar,
+  GridToolbarContainer,
+  GridToolbarExport,
+} from "@mui/x-data-grid";
+import converteParaReal from "./uteis/ConvertReal";
+import { Button } from "@mui/material";
+import { themeButton } from "./uteis/TemasCSS";
 
 function calculaPorcentagem(comi, total) {
   return ((comi / total) * 100).toFixed(2);
@@ -31,12 +32,6 @@ const Sintetico = ({ modal, setModal, pedidosSinteticos }) => {
     if (e.target === ref.current) setModal(false);
   }
 
-  let tabela = {
-    exclusiva: 0,
-    devolucao: 0,
-    comum: 0,
-  };
-
   React.useState(() => {
     setFiltroAtual(filtroTotal);
     setTituloAtual({
@@ -47,7 +42,6 @@ const Sintetico = ({ modal, setModal, pedidosSinteticos }) => {
       if (+calculaPorcentagem(filtro.comissao, filtro.total) === 1) {
         filtroExclusivo.push(filtro);
       } else if (+calculaPorcentagem(filtro.comissao, filtro.total) < 0) {
-        console.log(filtro);
         filtroDevolucao.push(filtro);
       } else {
         filtroComum.push(filtro);
@@ -55,109 +49,125 @@ const Sintetico = ({ modal, setModal, pedidosSinteticos }) => {
     });
   }, []);
 
+  class filtroPedidos {
+    constructor(filtro, titulo) {
+      this.filtro = filtro;
+      this.titulo = titulo;
+    }
+    setFiltroAtual() {
+      setFiltroAtual(null);
+      setFiltroAtual(this.filtro);
+      setTituloAtual({
+        titulo: this.titulo,
+        quantidade: this.filtro.length,
+      });
+    }
+  }
+
   function handleDevolucao() {
-    setFiltroAtual(null);
-    setFiltroAtual(filtroDevolucao);
-    setTituloAtual({
-      titulo: "Devoluções",
-      quantidade: filtroDevolucao.length,
-    });
+    const devolucao = new filtroPedidos(filtroDevolucao, "Devoluções");
+    devolucao.setFiltroAtual();
   }
 
   function handleExclusiva() {
-    setFiltroAtual(null);
-    setFiltroAtual(filtroExclusivo);
-    setTituloAtual({
-      titulo: "Tabela Exclusiva",
-      quantidade: filtroExclusivo.length,
-    });
+    const exclusiva = new filtroPedidos(filtroExclusivo, "Tabela Exclusiva");
+    exclusiva.setFiltroAtual();
   }
 
   function handleComum() {
-    setFiltroAtual(null);
-    setFiltroAtual(filtroComum);
-    setTituloAtual({
-      titulo: "Tabela Comum",
-      quantidade: filtroComum.length,
-    });
+    const comum = new filtroPedidos(filtroComum, "Tabela Comum");
+    comum.setFiltroAtual();
   }
 
   function handleTotal() {
-    setFiltroAtual(null);
-    setFiltroAtual(filtroTotal);
-    setTituloAtual({
-      titulo: "Todos",
-      quantidade: filtroTotal.length,
-    });
+    const total = new filtroPedidos(filtroTotal, "Todos os Pedidos");
+    total.setFiltroAtual();
   }
 
+  const columns = [
+    { field: "col1", headerName: "Apuração", flex: 0.5 },
+    { field: "col2", headerName: "Pedido", flex: 0.5 },
+    { field: "col3", headerName: "Cliente", flex: 2 },
+    { field: "col4", headerName: "Vendedor", flex: 1 },
+    {
+      field: "col5",
+      headerName: "Valor do Pedido",
+      flex: 1,
+      ...converteParaReal(),
+    },
+    { field: "col6", headerName: "Comissão", flex: 1, ...converteParaReal() },
+  ];
+
+  const rows = filtroAtual.map((fil, index) => {
+    return {
+      id: index,
+      col1: fil.apuracao,
+      col2: fil.pedido,
+      col3: fil.cliente,
+      col4: fil.vendedor,
+      col5: fil.total,
+      col6: fil.comissao,
+    };
+  });
+
   return (
-    <div ref={ref} onClick={handleClick} className={style.metas}>
+    <div ref={ref} onClick={handleClick} className={style.sintetico}>
       <div className={`${style.container} left`}>
         <div onClick={() => setModal(false)} className={style.img}>
           {" "}
           <img src={close} />
         </div>
         <div className={grid.legenda}>
-          <span onClick={handleDevolucao} className={grid.devolucao}>
+          <Button
+            variant="contained"
+            style={themeButton.yellow}
+            onClick={handleDevolucao}
+          >
             Devolução = {filtroDevolucao.length}
-          </span>
-          <span onClick={handleExclusiva} className={grid.exclusiva}>
+          </Button>
+          <Button
+            variant="contained"
+            onClick={handleExclusiva}
+            style={themeButton.green}
+          >
             Tabela Excusiva = {filtroExclusivo.length}
-          </span>
-          <span onClick={handleComum} className={grid.comum}>
+          </Button>
+          <Button
+            style={themeButton.white}
+            onClick={handleComum}
+            variant="contained"
+          >
             Venda Comum = {filtroComum.length}
-          </span>
-          <span onClick={handleTotal} className={grid.total}>
+          </Button>
+          <Button
+            style={themeButton.black}
+            onClick={handleTotal}
+            variant="contained"
+          >
             Total = {filtroTotal.length}
-          </span>
+          </Button>
         </div>
         <h1>{tituloAtual.titulo + " " + tituloAtual.quantidade}</h1>
         <div className={grid.containerTable}>
-          <table className={`table table-hover ${grid.grid}`}>
-            <thead>
-              <tr>
-                <th>Pedido</th>
-                <th>Cliente</th>
-                <th>Vendedor</th>
-                <th>Valor Comissionado</th>
-                <th>% Comissionado</th>
-                <th>Valor da Comissão</th>
-                <th>Data de Emissão</th>
-              </tr>
-            </thead>
-            <tbody className={grid.tbody}>
-              {filtroAtual &&
-                filtroAtual.map((sint, index) => {
-                  let cor;
-
-                  function verificaCor() {
-                    if (+calculaPorcentagem(sint.comissao, sint.total) === 1) {
-                      cor = "springGreen";
-                      tabela.exclusiva += 1;
-                    } else if (
-                      +calculaPorcentagem(sint.comissao, sint.total) < 0
-                    ) {
-                      cor = "yellow";
-                      tabela.devolucao += 1;
-                    } else {
-                      tabela.comum += 1;
-                    }
-                  }
-
-                  verificaCor();
-
-                  return (
-                    <RowComponent
-                      cor={cor}
-                      sint={sint}
-                      converteParaReal={converteParaReal}
-                      calculaPorcentagem={calculaPorcentagem}
-                    />
-                  );
-                })}
-            </tbody>
-          </table>
+          <div style={{ height: "100%", width: "100%" }}>
+            <DataGrid
+              rows={rows}
+              columns={columns}
+              slots={{ toolbar: GridToolbar }}
+              sx={{
+                "@media print": {
+                  ".MuiDataGrid-main": {
+                    color: "rgba(0, 0, 0, 0.87)",
+                    width: "100%",
+                    pageBreakInside: "avoid",
+                  },
+                  ".MuiDataGrid-cell": {
+                    pageBreakInside: "auto",
+                  },
+                },
+              }}
+            />
+          </div>
         </div>
       </div>
     </div>

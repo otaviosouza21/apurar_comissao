@@ -15,13 +15,14 @@ const Resumo = () => {
       pedidoExistente["Valor da Comissão"] += atual["Valor da Comissão"];
     } else {
       // Se o pedido não existe, adicione-o ao acumulador
-      acumulador.push({ pedido: atual["Pedido"], valor: atual["Valor da Comissão"] });
+      acumulador.push({
+        pedido: atual["Pedido"],
+        valor: atual["Valor da Comissão"],
+      });
     }
 
     return acumulador;
   }, []);
-
-
 
   return;
 };

@@ -1,9 +1,6 @@
 import React from "react";
 import style from "../estilo/css/Resultado.module.css";
-import Metas from "./Metas";
-import ProgressBar from "./ProgressBar";
 import { GlobalContext } from "../Helps/GlobalContext";
-import Alerta from "./Alerta";
 import Resumo from "./Resumo";
 import Sintetico from "./Sintetico";
 
@@ -16,12 +13,13 @@ const Resultado = ({
   porcVendido,
   valVendidoExclusivo,
   valVendidoComum,
-  pedidosSinteticos
+  pedidosSinteticos,
 }) => {
   const [modal, setModal] = React.useState("");
-  const { atuaisMetas, setAlerta, alerta } = React.useContext(GlobalContext);
+  const [visualizar, setvisualizar] = React.useState(false);
 
   function converteParaReal(numero) {
+    // faz a conversão para R$ XX.XX
     return numero.toLocaleString("pt-BR", {
       style: "currency",
       currency: "BRL",
@@ -32,29 +30,49 @@ const Resultado = ({
     setModal(modal);
   }
 
+  // Renderiza todos os resultados na tela
   return (
     <section className={style.resultado}>
-     { modal == "sintetico" && <Sintetico setModal={setModal} pedidosSinteticos={pedidosSinteticos} />}
-      <div className={style.head}>
+      {modal == "sintetico" && (
+        <Sintetico setModal={setModal} pedidosSinteticos={pedidosSinteticos} /> // Modal SINTETICo
+      )}
+      <div className={`${style.head} shadow-sm  bg-body `}>
         <h3 className={style.vendedora}>
           Vendedor(a) <span>{vendedora}</span>{" "}
         </h3>
       </div>
-      <div className={style.head} onClick={()=>{handleCLick("sintetico")}}>
-        <p className={style.valorTotal}>
-          <div>
-            Valor total já Vendido{" "}
-            <span>
-              {converteParaReal(valVendidoComum + valVendidoExclusivo)}{" "}
-            </span>{" "}
+      <div
+        className={`${style.head} shadow-sm  bg-body `}
+        onClick={() => {
+          handleCLick("sintetico");
+        }}
+        onMouseOver={() => setvisualizar(false)}
+      >
+        {visualizar && (
+          <div
+            onMouseLeave={() => setvisualizar(!visualizar)}
+            className={style.visualizar}
+          >
+            <p>Clique para visualizar os pedidos</p>
           </div>
-          <div>
-            Valor total da Comissão: <span>{converteParaReal(valorTotal)}</span>{" "}
-          </div>
-        </p>
+        )}
+        {visualizar === false && (
+          <p className={style.valorTotal}>
+            <div>
+              Valor total já Vendido{" "}
+              <span>
+                {converteParaReal(valVendidoComum + valVendidoExclusivo)}{" "}
+              </span>{" "}
+            </div>
+            <div>
+              Valor total da Comissão:{" "}
+              <span>{converteParaReal(valorTotal)}</span>{" "}
+            </div>
+          </p>
+        )}
       </div>
 
-      <div className={style.tabelaContainer}>
+      <div className={`${style.tabelaContainer} shadow-sm  bg-body`}>
         <h1>Venda Comum</h1>
         <div className={style.atualizadas}>
           <div className={style.apuracao}>
@@ -67,7 +85,7 @@ const Resultado = ({
           </div>
         </div>
       </div>
-      <div className={style.tabelaContainer}>
+      <div className={`${style.tabelaContainer} shadow-sm  bg-body`}>
         <h1>Promoção Exclusiva</h1>
         <div className={style.atualizadas}>
           <div className={style.apuracao}>
@@ -78,36 +96,7 @@ const Resultado = ({
             <h4>Total Comissão</h4>
             <p>{converteParaReal(valorExclusivo)}</p>
           </div>
-          <button onClick={()=>{handleCLick("metas")}} className="btn btn-secondary btn-sm">
-            Metas Atualizadas
-          </button>
         </div>
-
-        <div className={style.porcentagem}>
-          {atuaisMetas
-            ? atuaisMetas.map((item, index) => {
-                return (
-                  <div key={index}>
-                    <ProgressBar
-                      key={item.codigo}
-                      item={item}
-                      porcentagem={porcVendido["porc_" + item.codigo]}
-                    />
-                  </div>
-                );
-              })
-            : alerta && <Alerta setAlerta={setAlerta} alerta={alerta} />}
-        </div>
-
-        {modal == "metas" && (
-          <Metas
-            metas={atuaisMetas}
-            valVendido={valVendido}
-            porcVendido={porcVendido}
-            modal={modal}
-            setModal={setModal}
-          />
-        )}
       </div>
     </section>
   );

@@ -11,13 +11,14 @@ const SubirArquivo = () => {
   }
 
   return (
-    <div className={style.container}>
-      <label htmlFor="fileInput">Busque a planilha de comissão Detalhada</label>
+    <div className={`${style.container} input-group mb-1`}>
+      <label htmlFor="fileInput" className="form-control">Busque a planilha de comissão Detalhada</label>
       <input
         onChange={handleChange}
         id="fileInput"
         type="file"
         accept=".xlsx, .xls, .csv"
+        className="input-group-text"
       />
       {mandaFile && <ExcelConverter file={mandaFile} />}
     </div>
