@@ -11,30 +11,63 @@
   display: flex;
   align-items: center;
   gap: 20px;
-  background-color: rgba(0, 0, 0, 0.658);
+  background-color: var(--bs-body-bg);
   padding: 10px 20px;
   border-radius: 10px;
-  box-shadow: 0px 0px 15px 5px rgba(0, 0, 0, 0.253);
-  border: solid 2px rgb(37, 37, 37);
+  border: solid 2px var(--bs-border-color);
   display: flex;
   justify-content: center;
+  color: var(--bs-primary);
+  font-weight: 600;
 }
 
-.head:hover {
-  cursor: pointer;
-  background-color: black;
-}
 
-.head:active {
+
+
+.head:nth-child(2):hover {
   transform: scale(1.01);
+  background-color: var(--bs-primary) !important;
+  cursor: pointer;
+  color: white;
+  transition: .2s ;
+  animation: push 2s forwards infinite;
 }
+
+.head:nth-child(2):hover .valorTotal div span{
+color: black;
+
+}
+
+@keyframes push {
+  0%{
+    transform: scale(1);
+  }
+  
+
+  50%{
+    transform: scale(0.98);
+  }
+
+  100%{
+    transform: scale(1);
+  }
+
+}
+
+.visualizar{
+  flex: 1;
+}
+
+
 .valorTotal {
   display: flex;
   border-radius: 10px;
   font-size: 1.2rem;
   margin-bottom: 10px;
-  gap: 20px;
   justify-content: center;
+  align-items: center;
+  justify-content: space-around;
+  gap: 10px;
 }
 
 .valorTotal div {
@@ -42,27 +75,32 @@
   flex-direction: column;
   justify-content: center;
   align-items: center;
+  justify-content: space-around;
   padding: 5px;
+  text-align: center;
+
 }
 
 .valorTotal div:last-child {
-  border-left: solid 1px rgb(37, 37, 37);
+  border-left: solid 1px var(--bs-secondary-bg)
 }
 
 .valorTotal span {
   display: flex;
   align-items: center;
-  color: green;
+  color: var(--bs-success);
   font-weight: bold;
   margin-left: 10px;
 }
 
 .vendedora {
   font-size: 1.2rem;
+  color: var(--bs-secondary-color);
 }
 
 .vendedora span {
-  color: green;
+  color: var(--bs-primary);
+
 }
 
 .tabelas {
@@ -76,15 +114,19 @@
 
 .tabelaContainer {
   text-align: center;
-  background-color: rgba(0, 0, 0, 0.658);
+  background-color: var(--bs-body-bg);
   flex: 1;
   border-radius: 10px;
   box-shadow: 0px 0px 15px 5px rgba(0, 0, 0, 0.253);
-  border: solid 2px rgb(37, 37, 37);
+  border: solid 2px var(--bs-border-color);
+  color: var(--bs-secondary-color);
+  justify-content: center;
+  align-items: center;
 }
 
 .tabelaContainer h1 {
   font-size: 1.6rem;
+  text-align: center;
 }
 
 .atualizadas {
@@ -92,14 +134,19 @@
   justify-content: space-around;
   gap: 20px;
   align-items: center;
-  background: rgb(22, 22, 22);
   font-size: 1rem;
+  padding: 5px;
 }
 
 .apuracao {
   display: flex;
   flex-direction: column;
   padding: 10px;
+  flex: 1;
+}
+
+.apuracao:nth-child(1){
+  border-right: solid 1px var(--bs-secondary-bg);
 }
 
 .apuracao h4 {
@@ -107,7 +154,7 @@
 }
 
 .apuracao p {
-  color: rgb(0, 94, 0);
+  color: var(--bs-success);
   font-weight: bold;
   font-size: 1.3rem;
 }
@@ -120,10 +167,30 @@
 
 @media (max-width: 970px) {
   .resultado {
-    gap: 60px;
+    gap: 10px;
+    grid-template-columns: 1fr;
   }
 
   .tabelas {
     flex-direction: column;
+  }
+}
+
+@media (max-width: 570px){
+  .vendedora{
+    font-size: .9rem;
+    text-align: center;
+  }
+  .valorTotal{
+    font-size: 1rem;
+  
+  }
+
+  .tabelaContainer h1{
+    font-size: 1.1rem;
+  }
+
+  .apuracao p{
+    font-size: 1.1rem;
   }
 }

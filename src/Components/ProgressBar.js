@@ -4,6 +4,7 @@ import style from "../estilo/css/ProgressBar.module.css";
 const ProgressBar = ({ porcentagem, item }) => {
   const quantidadeVendida = (porcentagem / 100) * item.meta_quant;
 
+// verifica a cor que a porcentagem vai ser pintada baseado na porcentagem da meta
   function bateuMeta(porcentagem) {
     if (porcentagem < 50) {
       return "red";
@@ -14,6 +15,8 @@ const ProgressBar = ({ porcentagem, item }) => {
     }
   }
 
+
+// renderiza a barra de progresso de cada item cadastrado nas metas
   return (
     <section className={style.container}>
       <p className={style.descricao}>

@@ -96,7 +96,7 @@ const Apuracao = () => {
       ).toFixed(2);
     });
 
-  //APURAÇÃO DE PEDIDOS SINTETICOS
+  //APURAÇÃO DE PEDIDOS SINTETICOSVVVVV
 
   const sinteticos = {};
 
@@ -112,6 +112,7 @@ const Apuracao = () => {
 
   const pedidosSinteticos = [];
 
+  //Inserie as informações direcionadas para o objeto pedidosSinteticos{}
   for (const obj in sinteticos) {
     pedidosSinteticos[obj] = {
       pedido: sinteticos[obj][0]["Pedido"],
@@ -127,6 +128,7 @@ const Apuracao = () => {
     };
   }
 
+  // Filtro tudo que é undefined nos pedidos sinteticos
   const filtroPedidosSinteticos = pedidosSinteticos.filter((filt) => {
     return filt !== undefined;
   });
