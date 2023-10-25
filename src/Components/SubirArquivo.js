@@ -12,7 +12,9 @@ const SubirArquivo = () => {
 
   return (
     <div className={`${style.container} input-group mb-1`}>
-      <label htmlFor="fileInput" className="form-control">Busque a planilha de comissão Detalhada</label>
+      <label htmlFor="fileInput" className="form-control">
+        Busque a planilha de comissão Detalhada
+      </label>
       <input
         onChange={handleChange}
         id="fileInput"
