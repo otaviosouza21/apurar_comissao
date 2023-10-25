@@ -11,6 +11,7 @@ import {
 import converteParaReal from "./uteis/ConvertReal";
 import { Button } from "@mui/material";
 import { themeButton } from "./uteis/TemasCSS";
+import Stats from "./graphs/Stats";
 
 function calculaPorcentagem(comi, total) {
   return ((comi / total) * 100).toFixed(2);
@@ -113,11 +114,12 @@ const Sintetico = ({ modal, setModal, pedidosSinteticos }) => {
   return (
     <div ref={ref} onClick={handleClick} className={style.sintetico}>
       <div className={`${style.container} left`}>
+        <Stats total={filtroTotal} />
         <div onClick={() => setModal(false)} className={style.img}>
           {" "}
           <img src={close} />
         </div>
-        <div className={grid.legenda}>
+        {/* <div className={grid.legenda}>
           <Button
             variant="contained"
             style={themeButton.yellow}
@@ -168,7 +170,7 @@ const Sintetico = ({ modal, setModal, pedidosSinteticos }) => {
               }}
             />
           </div>
-        </div>
+        </div> */}
       </div>
     </div>
   );

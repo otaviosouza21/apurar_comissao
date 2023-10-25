@@ -12,7 +12,6 @@ const Home = () => {
   return (
     <main className={style.main}>
       <h1>Apuração de Comissões</h1>
-
       <SubirArquivo />
       {data && <Apuracao />}
     </main>
