@@ -44,7 +44,6 @@ const Apuracao = () => {
   //calcula comissao total
   const comissao_total = comissao_comum + comissao_exclusiva;
 
-
   //APURAÇÃO DE PEDIDOS SINTETICOSVVVVV
 
   const sinteticos = {};
@@ -74,14 +73,18 @@ const Apuracao = () => {
       comissao: sinteticos[obj].reduce((a, b) => {
         return a + b["Valor da Comissão"];
       }, 0),
+      color: sinteticos[obj][0]['% Comissão Apurado']
     };
   }
 
+
+ 
   // Filtro tudo que é undefined nos pedidos sinteticos
   const filtroPedidosSinteticos = pedidosSinteticos.filter((filt) => {
     return filt !== undefined;
   });
 
+  console.log(filtroPedidosSinteticos);
   return (
     <section className={style.apuracao}>
       <Resultado // componente renderizado com todas as informações abaixo como parametro

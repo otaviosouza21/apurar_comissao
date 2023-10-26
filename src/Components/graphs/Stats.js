@@ -1,28 +1,27 @@
 import { LineChart } from "@mui/x-charts";
-import React from "react";
+import React, { useEffect, useState } from "react";
 
 const Stats = ({ total }) => {
-  const [vendido, setVendido] = React.useState([]);
+  const [valoresTotais, setValoresTotais] = useState([]);
+  const [pedidosTotais, setPedidosTotais] = useState([]);
 
-  React.useEffect(() => {
-    total.forEach((tot) => {
-      setVendido([...vendido, tot.total]);
-    });
-  },[]);
-
-  console.log(vendido);
+  useEffect(() => {
+    const formattedTotais = total.map((tot) => +tot.total.toFixed(2));
+    const formattedPedidos = total.map((tot) => tot.pedido);
+    setValoresTotais(formattedTotais);
+    setPedidosTotais(formattedPedidos);
+  }, [total]);
 
   return (
-    <LineChart
-      xAxis={[{ data: [1, 2, 3, 5, 8, 10] }]}
-      series={[
-        {
-          data: [2, 5.5, 2, 8.5, 1.5, 5],
-        },
-      ]}
-      width={500}
-      height={300}
-    />
+    valoresTotais.length > 0 &&
+    pedidosTotais.length > 0 && (
+      <LineChart
+        width={1000}
+        height={300}
+        series={[{ data: valoresTotais, label: "Valor do Pedido" }]}
+        xAxis={[{ scaleType: "point", data: pedidosTotais }]}
+      />
+    )
   );
 };
 
