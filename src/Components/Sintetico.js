@@ -1,17 +1,21 @@
-import React from "react";
+import React, { version } from "react";
 import style from "../estilo/css/Sintetico.module.css";
 import grid from "../estilo/css/Grid.module.css";
 import close from "../estilo/img/close-circle-svgrepo-com.svg";
 import {
   DataGrid,
   GridToolbar,
+  GridToolbarColumnsButton,
   GridToolbarContainer,
+  GridToolbarDensitySelector,
   GridToolbarExport,
+  GridToolbarFilterButton,
+  GridToolbarQuickFilter,
 } from "@mui/x-data-grid";
 import converteParaReal from "./uteis/ConvertReal";
 import { Button } from "@mui/material";
 import { themeButton } from "./uteis/TemasCSS";
-import Stats from "./graphs/Stats";
+import { GridToolbarExportContainer } from "@mui/x-data-grid";
 
 function calculaPorcentagem(comi, total) {
   return ((comi / total) * 100).toFixed(2);
@@ -42,6 +46,7 @@ const Sintetico = ({ modal, setModal, pedidosSinteticos }) => {
     pedidosSinteticos.forEach((filtro) => {
       if (+calculaPorcentagem(filtro.comissao, filtro.total) === 1) {
         filtroExclusivo.push(filtro);
+        filtroExclusivo.color = "red";
       } else if (+calculaPorcentagem(filtro.comissao, filtro.total) < 0) {
         filtroDevolucao.push(filtro);
       } else {
@@ -85,6 +90,14 @@ const Sintetico = ({ modal, setModal, pedidosSinteticos }) => {
     total.setFiltroAtual();
   }
 
+  function verificaCor(item, comissao) {
+    if (item === 1) {
+      return "Exclusiva";
+    } else if (comissao < 0) {
+      return "Devolução";
+    } else return "Comum";
+  }
+
   const columns = [
     { field: "col1", headerName: "Apuração", flex: 0.5 },
     { field: "col2", headerName: "Pedido", flex: 0.5 },
@@ -96,7 +109,9 @@ const Sintetico = ({ modal, setModal, pedidosSinteticos }) => {
       flex: 1,
       ...converteParaReal(),
     },
-    { field: "col6", headerName: "Comissão", flex: 1, ...converteParaReal() },
+    { field: "col6", headerName: "%", flex: 0.5 },
+    { field: "col7", headerName: "Comissão", flex: 1, ...converteParaReal() },
+    { field: "col8", headerName: "Tabela", flex: 1 },
   ];
 
   const rows = filtroAtual.map((fil, index) => {
@@ -107,19 +122,33 @@ const Sintetico = ({ modal, setModal, pedidosSinteticos }) => {
       col3: fil.cliente,
       col4: fil.vendedor,
       col5: fil.total,
-      col6: fil.comissao,
+      col6: ((fil.comissao / fil.total) * 100).toFixed(2) + "%",
+      col7: fil.comissao,
+      col8: verificaCor(fil.color, fil.comissao),
     };
   });
+
+  function CustomToolbar() {
+    return (
+      <GridToolbarContainer>
+        <GridToolbarQuickFilter />
+        <GridToolbarFilterButton />
+        <GridToolbarColumnsButton />
+        <GridToolbarDensitySelector />
+        <GridToolbarExport />
+        <GridToolbarExportContainer />
+      </GridToolbarContainer>
+    );
+  }
 
   return (
     <div ref={ref} onClick={handleClick} className={style.sintetico}>
       <div className={`${style.container} left`}>
-        <Stats total={filtroTotal} />
         <div onClick={() => setModal(false)} className={style.img}>
           {" "}
           <img src={close} />
         </div>
-        {/* <div className={grid.legenda}>
+        <div className={grid.legenda}>
           <Button
             variant="contained"
             style={themeButton.yellow}
@@ -127,12 +156,13 @@ const Sintetico = ({ modal, setModal, pedidosSinteticos }) => {
           >
             Devolução = {filtroDevolucao.length}
           </Button>
+
           <Button
             variant="contained"
             onClick={handleExclusiva}
             style={themeButton.green}
           >
-            Tabela Excusiva = {filtroExclusivo.length}
+            Tabela Exclusiva = {filtroExclusivo.length}
           </Button>
           <Button
             style={themeButton.white}
@@ -155,22 +185,23 @@ const Sintetico = ({ modal, setModal, pedidosSinteticos }) => {
             <DataGrid
               rows={rows}
               columns={columns}
-              slots={{ toolbar: GridToolbar }}
+              slots={{ toolbar: CustomToolbar }}
               sx={{
                 "@media print": {
                   ".MuiDataGrid-main": {
-                    color: "rgba(0, 0, 0, 0.87)",
-                    width: "100%",
+                    position: "relative",
+                    top: "2000px",
                     pageBreakInside: "avoid",
+                    margin: "10mm",
                   },
-                  ".MuiDataGrid-cell": {
-                    pageBreakInside: "auto",
-                  },
+                },
+                "@page": {
+                  size: "A1 landscape",
                 },
               }}
             />
           </div>
-        </div> */}
+        </div>
       </div>
     </div>
   );
