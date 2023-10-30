@@ -1,14 +1,14 @@
 {
   "files": {
     "main.css": "/apurar_comissao/static/css/main.20e85a88.css",
-    "main.js": "/apurar_comissao/static/js/main.690973d3.js",
+    "main.js": "/apurar_comissao/static/js/main.44abc361.js",
     "index.html": "/apurar_comissao/index.html",
     "static/media/close-circle-svgrepo-com.svg": "/apurar_comissao/static/media/close-circle-svgrepo-com.1c16dc7c6b2349273472600860ffb517.svg",
     "main.20e85a88.css.map": "/apurar_comissao/static/css/main.20e85a88.css.map",
-    "main.690973d3.js.map": "/apurar_comissao/static/js/main.690973d3.js.map"
+    "main.44abc361.js.map": "/apurar_comissao/static/js/main.44abc361.js.map"
   },
   "entrypoints": [
     "static/css/main.20e85a88.css",
-    "static/js/main.690973d3.js"
+    "static/js/main.44abc361.js"
   ]
 }
