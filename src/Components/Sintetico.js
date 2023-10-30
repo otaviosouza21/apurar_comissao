@@ -16,6 +16,7 @@ import converteParaReal from "./uteis/ConvertReal";
 import { Button } from "@mui/material";
 import { themeButton } from "./uteis/TemasCSS";
 import { GridToolbarExportContainer } from "@mui/x-data-grid";
+import ExportToExcel from "../Helps/ExportToExcel";
 
 function calculaPorcentagem(comi, total) {
   return ((comi / total) * 100).toFixed(2);
@@ -110,7 +111,13 @@ const Sintetico = ({ modal, setModal, pedidosSinteticos }) => {
       ...converteParaReal(),
     },
     { field: "col6", headerName: "%", flex: 0.5 },
-    { field: "col7", headerName: "Comissão", flex: 1, ...converteParaReal() },
+    {
+      field: "col7",
+      headerName: "Comissão",
+      flex: 1,
+      ...converteParaReal(),
+      editable: true,
+    },
     { field: "col8", headerName: "Tabela", flex: 1 },
   ];
 
@@ -128,6 +135,18 @@ const Sintetico = ({ modal, setModal, pedidosSinteticos }) => {
     };
   });
 
+  const ColunasExp = columns.map((col) => col.headerName);
+  const LinhasExp = rows.map((row) => [
+    row.col1,
+    row.col2,
+    row.col3,
+    row.col4,
+    row.col5,
+    row.col6,
+    row.col7,
+    row.col8,
+  ]);
+
   function CustomToolbar() {
     return (
       <GridToolbarContainer>
@@ -137,6 +156,7 @@ const Sintetico = ({ modal, setModal, pedidosSinteticos }) => {
         <GridToolbarDensitySelector />
         <GridToolbarExport />
         <GridToolbarExportContainer />
+        <ExportToExcel row={LinhasExp} colum={ColunasExp} />
       </GridToolbarContainer>
     );
   }

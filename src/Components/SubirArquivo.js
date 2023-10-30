@@ -2,7 +2,7 @@ import React from "react";
 import style from "../estilo/css/SubirArquivo.module.css";
 import ExcelConverter from "../Helps/ExcelConverter";
 import { Button, FilledInput } from "@mui/material";
-import CloudUploadIcon from '@mui/icons-material/CloudUpload';
+import CloudUploadIcon from "@mui/icons-material/CloudUpload";
 
 import styled from "@emotion/styled";
 const SubirArquivo = () => {
@@ -27,7 +27,11 @@ const SubirArquivo = () => {
 
   return (
     <div className={`${style.container} input-group mb-1`}>
-      <Button component="label" variant="contained" startIcon={<CloudUploadIcon />}>
+      <Button
+        component="label"
+        variant="contained"
+        startIcon={<CloudUploadIcon />}
+      >
         Busque o relatorio de comissão Detalhada
         <VisuallyHiddenInput
           onChange={handleChange}

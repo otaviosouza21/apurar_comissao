@@ -8,6 +8,8 @@ const Apuracao = () => {
 
   const vendedora = data[0]["Apelido"];
 
+  console.log();
+
   //filtra apenas comissoes exclusivas
   const tabela_exclusiva = data.filter((exc) => {
     return exc["% Comissão"] === 1;
@@ -42,7 +44,7 @@ const Apuracao = () => {
   const valVendidoComum = valorVendidoCom;
 
   //calcula comissao total
-  const comissao_total = comissao_comum + comissao_exclusiva;
+  const comissao_total = data[data.length - 1]["Valor da Comissão"];
 
   //APURAÇÃO DE PEDIDOS SINTETICOSVVVVV
 
@@ -73,18 +75,15 @@ const Apuracao = () => {
       comissao: sinteticos[obj].reduce((a, b) => {
         return a + b["Valor da Comissão"];
       }, 0),
-      color: sinteticos[obj][0]['% Comissão Apurado']
+      color: sinteticos[obj][0]["% Comissão Apurado"],
     };
   }
 
-
- 
   // Filtro tudo que é undefined nos pedidos sinteticos
   const filtroPedidosSinteticos = pedidosSinteticos.filter((filt) => {
     return filt !== undefined;
   });
 
-  console.log(filtroPedidosSinteticos);
   return (
     <section className={style.apuracao}>
       <Resultado // componente renderizado com todas as informações abaixo como parametro
